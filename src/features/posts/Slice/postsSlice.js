@@ -1,7 +1,6 @@
 import { createSlice, nanoid, createAsyncThunk } from '@reduxjs/toolkit';
 
-// import { client } from '../../../api/client';
-import { getSubredditPosts } from '../../../api/reddit';
+import { getSubredditPosts, getPostComments } from '../../../api/reddit';
 
 const initialState = {
   posts: [],
@@ -10,14 +9,15 @@ const initialState = {
   sorting:'/'
 };
 
-// export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-//   const response = await client.get('/fakeApi/posts')
-//   return response.data
-// });
+export const  fetchPosts = createAsyncThunk('posts/fetchPosts', async (subreddit, sorting) => {
+       const  response   = await getSubredditPosts(subreddit, sorting);
+       return response;
+});
 
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (subreddit, sorting) => {
-  const  response = await getSubredditPosts(subreddit, sorting);
-  return response;
+export const  fetchComments = createAsyncThunk('posts/fetchComments', async ( data ) => {
+       const { permalink }  = data;
+       const   response     = await getPostComments(permalink);
+       return  response;
 });
 
 const postsSlice = createSlice({
@@ -40,10 +40,10 @@ const postsSlice = createSlice({
     },
     postUpdated(state, action) {
       const { id, title, content } = action.payload;
-      const   existingPost         = state.posts.find(post => post.id === id)
-      if (existingPost) {
-        existingPost.title = title
-        existingPost.content = content
+      const   existingPost         = state.posts.find(post => post.id === id);
+      if     (existingPost) {
+              existingPost.title   = title
+              existingPost.content = content
       }
     },
     postRefreshed(state) {
@@ -63,6 +63,7 @@ const postsSlice = createSlice({
   //thunks go here
   extraReducers(builder) {
     builder
+     //Posts===========================================
       .addCase(fetchPosts.pending, (state, action) => {
         state.status = 'loading'
       })
@@ -75,13 +76,25 @@ const postsSlice = createSlice({
         state.status = 'failed'
         state.error = action.error.message
       })
+      //Comments==========================================
+      .addCase(fetchComments.pending, (state, action) => {
+        state.posts[action.meta.arg.index].commentsStatus = 'loading';
+      })
+      .addCase(fetchComments.fulfilled, (state, action) => {
+        state.posts[action.meta.arg.index].commentsStatus = 'succeeded';
+        state.posts[action.meta.arg.index].comments = action.payload;
+      })
+      .addCase(fetchComments.rejected, (state, action) => {
+        state.posts[action.meta.arg.index].commentsStatus = 'failed';
+        state.posts[action.meta.arg.index].error = action.error.message;
+      })
   }
-})
+});
 
 export const { postAdded, postUpdated, postRefreshed, reactionAdded, sortingChanged } = postsSlice.actions
 
 export const selectAllPosts =  state          => state.posts.posts;
 
-export const selectPostById = (state, postId) => state.posts.posts.find(post => post.id === postId);
+export const selectPostById = (state, postId) => state.posts.posts.find(post => post.id === postId); 
 
 export default postsSlice.reducer;

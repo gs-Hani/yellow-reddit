@@ -1,9 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+import { getSubreddits } from '../../../api/reddit'
 
 const initialState = {
     subreddits: [],
-    currentSubbredit:"/r/popular/"
+    currentSubbredit:"/r/popular/",
+    status: 'idle',
+    error: null,
 };
+
+export const  fetchSubreddits = createAsyncThunk('subreddits/fetchSubreddits', async () => {
+    const  response   = await getSubreddits();
+    return response;
+});
 
 const subredditSlice = createSlice({
     name:'subreddit',
@@ -12,6 +21,22 @@ const subredditSlice = createSlice({
         selectedSubreddit(state, action) {
             state.currentSubbredit = (action.payload);
         }
+    },
+    //thunks go here
+    extraReducers(builder) {
+        builder
+        .addCase(fetchSubreddits.pending,   (state, action) => {
+            state.status     = 'loading';
+
+        })
+        .addCase(fetchSubreddits.fulfilled, (state, action) => {
+            state.status     = 'succeeded';
+            state.subreddits = action.payload;
+        })
+        .addCase(fetchSubreddits.rejected,  (state, action) => {
+            state.status     = 'failed';
+            state.error      = action.error.message;
+        })
     }
 });
 
