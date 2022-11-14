@@ -4,14 +4,15 @@ import { getSubreddits } from '../../../api/reddit'
 
 const initialState = {
     subreddits: [],
-    currentSubbredit:"/r/popular/",
+    currentSubbredit:'/r/popular/',
+    currentSorting:'hot/',
     status: 'idle',
     error: null,
 };
 
 export const  fetchSubreddits = createAsyncThunk('subreddits/fetchSubreddits', async () => {
-    const  response   = await getSubreddits();
-    return response;
+       const  response        = await getSubreddits();
+       return response;
 });
 
 const subredditSlice = createSlice({
@@ -20,7 +21,10 @@ const subredditSlice = createSlice({
     reducers:{
         selectedSubreddit(state, action) {
             state.currentSubbredit = (action.payload);
-        }
+        },
+        sortingChanged(state,action) {
+            state.currentSorting = action.payload
+        },
     },
     //thunks go here
     extraReducers(builder) {
@@ -40,8 +44,10 @@ const subredditSlice = createSlice({
     }
 });
 
-export const { selectedSubreddit } = subredditSlice.actions;
+export const { selectedSubreddit, sortingChanged } = subredditSlice.actions;
 
 export const selectCurrentSubreddit =  state => state.subreddit.currentSubbredit;
+export const selectCurrentSorting   =  state => state.subreddit.currentSorting;
+export const selectSubreddits       =  state => state.subreddit.subreddits;
 
 export default subredditSlice.reducer;

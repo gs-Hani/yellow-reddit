@@ -1,0 +1,13 @@
+.subreddits-list{
+  width: 100%
+}
+
+.subreddit{
+  background: var(--color-4);
+  margin: 20px 0px 20px;
+}
+
+.subreddit img {
+  width: 1.5em;
+  height: 100%;
+}

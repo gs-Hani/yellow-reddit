@@ -1,0 +1,11 @@
+#Header {
+    display: flex;
+    height: 50px
+}
+
+#Header > img ,h1 {
+    height:      var(--spacing-4);
+    font-size:   var(--spacing-4);
+    margin:      var(--spacing-0);
+    padding:     var(--spacing-0);
+}

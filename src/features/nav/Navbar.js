@@ -2,7 +2,7 @@ import   React /*====*/from 'react';
 import { useDispatch } from 'react-redux';
 // import { Link }/*====*/from 'react-router-dom';
 
-import { selectedSubreddit } from '../features/subreddits/Slice/subredditSlice'
+import { selectedSubreddit } from '../subreddits/Slice/subredditSlice'
 
 export const Navbar = () => {
 

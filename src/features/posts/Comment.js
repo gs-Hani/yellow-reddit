@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { PostAuthor } from './PostAuthor';
-import { TimeAgo }    from './TimeAgo';
+import { PostAuthor } from '../../components/PostAuthor';
+import { TimeAgo }    from '../../components/TimeAgo';
 
 export const Comment = ( {comment} ) => {
     return (
