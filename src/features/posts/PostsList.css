@@ -1,3 +1,7 @@
 .posts-list {
-    width: 100%
+    width: 100%;
+    overflow: auto;
+}
+.content {
+    overflow: auto;
 }

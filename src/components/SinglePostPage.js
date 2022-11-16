@@ -27,8 +27,10 @@ export const SinglePostPage = () => {
   useEffect(() => {
     if        (from === 'posts')   {
       dispatch(fetchComments(      {permalink, index}));
+      window.scrollTo({top: 0, behavior: 'smooth'});
     } else if (from === 'search')  {
       dispatch(fetchSearchComments({permalink, index}));
+      window.scrollTo({top: 0, behavior: 'smooth'});
     }
     }, [ dispatch, permalink, index, from ]
   );

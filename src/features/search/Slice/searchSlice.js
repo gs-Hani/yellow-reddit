@@ -1,21 +1,28 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { getSearchResultes, getPostComments } from '../../../api/reddit'
+import { getSearchResultes, getPostComments, getMoreSearchResultes } from '../../../api/reddit'
 
 const initialState = {
-    posts: [],
-    status: 'idle',
-    error: null
+    posts:      [],
+    status:     'idle',
+    status2:    'idle',
+    error:       null,
+    nextPostId: '',
 };
 
-export const  fetchSearchResults = createAsyncThunk('search/fetchSearchResults', async (data) => {
-       const  response           = await getSearchResultes(data);
+export const  fetchSearchResults   = createAsyncThunk('search/fetchSearchResults', async (data) => {
+       const  response             = await getSearchResultes(data);
        return response;
 });
 
-export const  fetchSearchComments = createAsyncThunk('posts/fetchSearchComments', async ( data ) => {
-       const { permalink }        = data;
-       const   response           = await getPostComments(permalink);
+export const  fetchMoreSearchPosts = createAsyncThunk('posts/fetchMoreSearchPosts', async (data) => {
+       const  response             = await getMoreSearchResultes(data);
+       return response;
+});
+
+export const   fetchSearchComments = createAsyncThunk('posts/fetchSearchComments', async ( data ) => {
+       const { permalink }         = data;
+       const   response            = await getPostComments(permalink);
        return  response;
 });
 
@@ -31,12 +38,29 @@ const searchSlice = createSlice({
         
             })
             .addCase(fetchSearchResults.fulfilled, (state, action) => {
-                state.status = 'succeeded';
-                state.posts  = action.payload;
+                const { nextPost, posts } = action.payload;
+                state.status     = 'succeeded';
+                state.posts      = posts;
+                state.nextPostId = nextPost;
             })
             .addCase(fetchSearchResults.rejected,  (state, action) => {
                 state.status = 'failed';
                 state.error  = action.error.message;
+            })
+        //More Search results======================================
+            .addCase(fetchMoreSearchPosts.pending,   (state, action) => {
+                state.status2 = 'loading';
+
+            })
+            .addCase(fetchMoreSearchPosts.fulfilled, (state, action) => {
+                const { nextPost, posts } = action.payload;
+                state.status2    = 'succeeded';
+                state.posts      = [...state.posts, ...posts];
+                state.nextPostId = nextPost;
+            })
+            .addCase(fetchMoreSearchPosts.rejected,  (state, action) => {
+                state.status2 = 'failed';
+                state.error   = action.error.message;
             })
         //Comments========================================
             .addCase(fetchSearchComments.pending,   (state, action) => {

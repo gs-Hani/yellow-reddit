@@ -1,14 +1,14 @@
 import   React, { useEffect }/*=====*/from 'react';
 import { useSelector, useDispatch }   from 'react-redux';
-import { Link }/*===================*/from 'react-router-dom';
+import   InfiniteScroll/*===========*/from 'react-infinite-scroller';
 
 import { Spinner }/*================*/from '../../components/Spinners';
-import { Post }/*===================*/from '../../components/Post';
-import { Sorting }/*===============*/ from './Sorting'
-import { selectAllPosts, fetchPosts } from './Slice/postsSlice';
+import { Content }/*================*/from '../../components/Content';
+import { Sorting }/*================*/from './Sorting'
+import { selectAllPosts, fetchPosts
+                    ,fetchMorePosts } from './Slice/postsSlice';
 import { selectCurrentSubreddit
               ,selectCurrentSorting } from '../subreddits/Slice/subredditSlice';
-import { orderData }/*============*/ from '../../utilities/orderData';
 
 import './PostsList.css';
 
@@ -18,45 +18,49 @@ export const PostsList = () => {
   //selectors======================================
   const posts      = useSelector(selectAllPosts);
   const postStatus = useSelector(state => state.posts.status);
+  const moreStatus = useSelector(state => state.posts.status2);
   const subreddit  = useSelector(selectCurrentSubreddit);
   const sorting    = useSelector(selectCurrentSorting);
   const error      = useSelector(state => state.posts.error);
-  
-  let content;
+  const nextPostId = useSelector(state => state.posts.nextPostId);
 
-  if (postStatus === 'loading') {
-    content = <Spinner text="Loading..." />
-  } else if (postStatus === 'succeeded') {
-    // Sort posts in reverse chronological order by datetime string
-    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare#examples
-        const orderedPosts = orderData(posts);
-    content = orderedPosts.map((post, index) => (
-      <Post key={post.id} post={post} >
-
-        <Link to=     {`/posts/${post.id}`} 
-              state=  {{ permalink: post.permalink, 
-                         index:     index, 
-                         id:        post.id, 
-                         from:      'posts' }} 
-              className="button muted-button">
-          {post.num_comments} comments
-        </Link>
-
-      </Post>
-    ));
-  } else if (postStatus === 'failed') {
-    content = <div>{error}</div>
-  } 
+  const loadMore = () => {
+    if (posts && moreStatus !== 'loading') { dispatch(fetchMorePosts({subreddit, sorting, nextPostId}));
+    console.log(posts);}
+  };
 
   useEffect(() => {
        dispatch(fetchPosts({subreddit, sorting}));
+       window.scrollTo({top: 0, behavior: 'smooth'});
   }, [ dispatch,            subreddit, sorting]);
+
+  if        (postStatus === 'loading')   { //==============================
+
+    return <Spinner text="Loading..." />
+
+  } else if (postStatus === 'succeeded') { //==============================
+
+    return (
+      <section className="posts-list">
+        <h2>Posts</h2>
+        <Sorting/>
+        <InfiniteScroll 
+          pageStart   ={0}
+          loadMore    ={loadMore}
+          hasMore     ={true}
+          loader      ={<Spinner key={0} text="Loading more..." />}
+          threshold   ={2000}
+          initialLoad ={false}
+          className   ='content'>
+            <Content data={ posts } />
+          </InfiniteScroll>
+      </section>
+    );
+
+  } else if (postStatus === 'failed')   { //==============================
+
+    return <div>{error}</div>
+
+  };
   
-  return (
-    <section className="posts-list">
-      <h2>Posts</h2>
-      <Sorting/>
-      {content}
-    </section>
-  );
 };
