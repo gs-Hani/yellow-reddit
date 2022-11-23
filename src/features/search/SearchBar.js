@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 
+import './SearchBar.css';
+
 export const SearchBar = (props) => {
 
     const navigate = useNavigate();
-
-    const formID = "search_reddit"
 
     const handleSearch = (event) => {
         event.preventDefault();
@@ -12,12 +12,10 @@ export const SearchBar = (props) => {
     } 
 
     return (
-        <div id="searchbar">
-            <label htmlFor={formID}>Search Reddit: </label>
-            <form className="search" onSubmit={handleSearch}>
-                <input type="search" id={formID} name="search_reddit" placeholder="Search Reddit" required></input>
-                <button type="submit">Go</button>
-            </form>
-        </div>
+        <form className="container" onSubmit={handleSearch}>
+            <input type="search" placeholder="Search..." required/>
+            <div className="search"></div>
+        </form>
     )
 }
+

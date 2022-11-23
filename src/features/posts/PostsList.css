@@ -1,7 +1,20 @@
 .posts-list {
-    width: 100%;
+    width: auto;
     overflow: auto;
+    margin: 0 0 0 var(--spacing-2);
+    background:    var(--color-1);
+    border-radius: var(--spacing-2);
+    padding:       0 15% ;
 }
+@media only screen and (max-width: 1024px) {
+    .posts-list {
+        padding: 0 5% ;
+        margin:  0;
+    }
+}
+
 .content {
     overflow: auto;
+    width: 96%;
+    padding: 0 2%;
 }

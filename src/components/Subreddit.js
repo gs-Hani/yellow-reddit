@@ -1,5 +1,5 @@
-import React from 'react';
+import   React  from 'react';
 
-export const Subbredit = ({ subreddit, thumbnail }) => {
+export const Subbredit = ({ subreddit }) => {
     return <span>{`r/${subreddit}`}</span>
 };

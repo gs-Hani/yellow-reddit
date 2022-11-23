@@ -1,6 +1,6 @@
-import   React, { useEffect }/*=====*/from 'react';
-import { useSelector, useDispatch }   from 'react-redux';
-import   InfiniteScroll/*===========*/from 'react-infinite-scroller';
+import   React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch }/*=*/from 'react-redux';
+import   InfiniteScroll/*=============*/from 'react-infinite-scroller';
 
 import { Spinner }/*================*/from '../../components/Spinners';
 import { Content }/*================*/from '../../components/Content';
@@ -24,11 +24,15 @@ export const PostsList = () => {
   const error      = useSelector(state => state.posts.error);
   const nextPostId = useSelector(state => state.posts.nextPostId);
 
-  const loadMore = () => {
-    if (posts && moreStatus !== 'loading') { dispatch(fetchMorePosts({subreddit, sorting, nextPostId}));
-    console.log(posts);}
-  };
+  const [oldId, setOldId] = useState(null); // local state
 
+  const loadMore = () => {
+    if (posts && moreStatus !== 'loading' && nextPostId !== oldId) {
+      dispatch(fetchMorePosts({subreddit, sorting, nextPostId}));
+      setOldId(nextPostId);
+    }
+  };
+  console.log(posts);
   useEffect(() => {
        dispatch(fetchPosts({subreddit, sorting}));
        window.scrollTo({top: 0, behavior: 'smooth'});
@@ -42,12 +46,11 @@ export const PostsList = () => {
 
     return (
       <section className="posts-list">
-        <h2>Posts</h2>
         <Sorting/>
         <InfiniteScroll 
           pageStart   ={0}
           loadMore    ={loadMore}
-          hasMore     ={true}
+          hasMore     ={nextPostId === oldId ? false : true}
           loader      ={<Spinner key={0} text="Loading more..." />}
           threshold   ={2000}
           initialLoad ={false}

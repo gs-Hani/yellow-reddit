@@ -6,16 +6,18 @@ export const Content = ({data}) => {
   return data.map((post, index) => (
 
     <Post key={post.id} post={post} >
-
-      <Link to=     {`/posts/${post.id}`} 
-            state=  {{ permalink: post.permalink, 
-                       index:     index, 
-                       id:        post.id, 
-                       from:      'posts' }} 
-                       className="button muted-button">
-        {post.num_comments} comments
-      </Link>
-
+      <div className='footer'>
+        <Link to=     {`/posts/${post.id}`} 
+              state=  {{ permalink: post.permalink, 
+                        index:     index, 
+                        id:        post.id, 
+                        from:      'posts' }} 
+                        className="button muted-button">
+          {post.num_comments} comments
+        </Link>
+        <span>{post.upvote_ratio * 100}%+</span>
+      </div>
+      
     </Post>
 
   ));

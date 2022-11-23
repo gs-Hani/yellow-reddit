@@ -17,7 +17,10 @@ function App() {
   return (
     <div className="App"> 
       <Router className='Router'>
-      <Header id='Header'/>
+        <Header id='Header'/>
+        <aside>
+          <Subreddits />
+        </aside> 
         <main>
           <Routes>
             <Route exact path="/"                   element={<PostsList/>}      />
@@ -25,9 +28,7 @@ function App() {
             <Route exact path="/search/:searchTerm" element={<SearchList/>}     />
           </Routes>
         </main> 
-        <aside>
-          <Subreddits />
-        </aside>   
+          
       </Router>
     </div>
   )

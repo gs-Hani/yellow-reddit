@@ -2,8 +2,6 @@ import   React, { useEffect }       from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, Link }        from 'react-router-dom';
 
-// import { PostAuthor }/*===========*/from './PostAuthor';
-// import { Subbredit }/*============*/from './Subreddit';
 import { Post }/*=================*/from './Post';
 import { Spinner }/*==============*/from './Spinners'   
 import { Comment }/*==============*/from '../features/posts/Comment';
@@ -14,8 +12,6 @@ import { orderData }/*============*/from '../utilities/orderData';
 export const SinglePostPage = () => {
   
   const   location   = useLocation();
-  // const { pathname } = location;
-  // const   postId     = pathname.split('/')[2];
   const { permalink, index, id, from }    = location.state;
   
   const post            = useSelector(state => state[from].posts.find(post => post.id === id));

@@ -1,3 +1,64 @@
-.post-excerpt img {
-    width: 100%;
+.post-excerpt {
+    background: var(--color-10);
+    padding: var(--spacing-2);
+    margin: 1% 0 ;
+    border-radius: var(--spacing-2);
+    width: auto;
+    color: var(--color-1);
+}
+
+main > .post-excerpt {
+    margin: 0 0 2% 2% ;
+    max-height: none;
+}
+
+
+.post-excerpt img, p, video {
+    width: auto;
+    max-width: 100%;
+    max-height: 40vw;
+}
+@media only screen and (max-width: 1024px) {
+    .post-excerpt img, p, video {
+        max-height: 60vw;
+    }
+    main > .post-excerpt {
+        margin: 0  2% 2% ;
+        max-height: none;
+    }
+}
+
+.post-excerpt .content-box {
+    align-content: center;
+    text-align  : center;
+    margin: 2% 0  ;
+}
+
+.post-excerpt a {
+    font-size: small;
+    color: var(--color-7);
+    transition: all 200ms;
+    text-shadow: var(--spacing-0) var(--spacing-0) var(--spacing-1) var(--color-6);
+}
+.post-excerpt a:hover {
+    font-size: small;
+    color: var(--color-7);
+    text-shadow: var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--color-8);
+    
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-excerpt span {
+    width: fit-content;
+    font-size: small;
+    color: var(--color-5);
+    
+}
+
+.sub-header {
+    color: var(--color-6)
 }

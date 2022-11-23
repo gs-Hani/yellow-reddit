@@ -1,7 +1,7 @@
-import   React, { useEffect }       from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation }/*==========*/from 'react-router-dom';
-import   InfiniteScroll/*=========*/from 'react-infinite-scroller';
+import   React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector }/*=*/from 'react-redux';
+import { useLocation }/*==============*/from 'react-router-dom';
+import   InfiniteScroll/*=============*/from 'react-infinite-scroller';
 
 import { fetchSearchResults,
        fetchMoreSearchPosts }/*===*/from './Slice/searchSlice';
@@ -23,10 +23,13 @@ export const SearchList = (props) => {
     const error         = useSelector(state => state.search.error);
     const nextPostId    = useSelector(state => state.search.nextPostId);
     const subreddit     = useSelector(state => state.subreddit.currentSubbredit);
+
+    const [oldId, setOldId] = useState(null); // local state
     
     const loadMore = () => {
-        if (searchResults && moreStatus !== 'loading') {
+        if (searchResults && moreStatus !== 'loading' && nextPostId !== oldId) {
           dispatch(fetchMoreSearchPosts({subreddit, searchTerm, nextPostId}));
+          setOldId(nextPostId);
           }
       };
     
@@ -42,8 +45,6 @@ export const SearchList = (props) => {
         }
     }, [dispatch, searchTerm, subreddit])
 
-    // let content; // An array of the search result posts
-
     if        (status === 'loading')   { //==============================
 
       return <Spinner text="Loading..." />
@@ -56,7 +57,7 @@ export const SearchList = (props) => {
           <InfiniteScroll 
           pageStart   ={0}
           loadMore    ={loadMore}
-          hasMore     ={true}
+          hasMore     ={nextPostId === oldId ? false : true}
           loader      ={<Spinner key={0} text="Loading more..." />}
           threshold   ={2000}
           initialLoad ={false}
@@ -71,36 +72,4 @@ export const SearchList = (props) => {
       return <div>{error}</div>
 
     };
-
-    // if        (status === 'loading')   { //==================
-    //     content = <Spinner text="Loading..." />
-    // } else if (status === 'succeeded') { //==================
-
-    //         const orderedPosts = orderData(searchResults);
-    //     content = orderedPosts.map((post, index) => (
-
-    //         <Post key={post.id} post={post} >
-      
-    //           <Link to=     {`/posts/${post.id}`} 
-    //                 state=  {{ permalink: post.permalink, 
-    //                            index:     index, 
-    //                            id:        post.id, 
-    //                            from:      'search' }} 
-    //                 className="button muted-button">
-    //             {post.num_comments} comments
-    //           </Link>
-      
-    //         </Post>
-
-    //       ));
-    // } else if (status === 'failed')    { //==================
-    //     content = <div>{error}</div>
-    // };
-
-    // return(
-    //     <div className="search-results">
-    //         <h2>Search results for "{searchTerm}"</h2>
-    //         {content}
-    //     </div>
-    // )
 };

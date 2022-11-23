@@ -1,6 +1,7 @@
 #Header {
     display: flex;
-    height: 50px
+    height: 50px;
+    margin: 0 0 var(--spacing-2) 0;
 }
 
 #Header > img ,h1 {
@@ -8,4 +9,62 @@
     font-size:   var(--spacing-4);
     margin:      var(--spacing-0);
     padding:     var(--spacing-0);
+    width:       auto;
+    font-family:'Ubuntu';
+}
+
+#Header span {
+    color: var(--color-10);
+}
+
+.search-bar {
+    width: 50%;
+}
+
+h1 {
+    width: 60%;
+}
+
+@media only screen and (max-width: 600px),(resolution:150dpi) {
+    h1 {
+        font-size:   var(--spacing-3);
+    }
+}
+
+label {
+    position: relative;
+    margin: auto var(--spacing-1) ;
+    background: var(--color-10);
+    width: var(--spacing-4);
+    height: var(--spacing-4);
+    border-radius: 50%;
+    transition: all 400ms;
+}
+
+#arrow { transition: all 400ms; }
+
+input[type=checkbox] {
+    visibility: hidden;
+}
+input[type="checkbox"]:checked ~ #arrow {
+    rotate: -180deg;
+}
+
+label img {
+    position: relative;
+    bottom: 18px;
+    height: 36px;
+    width:  36px;
+} 
+
+@media only screen and (min-width: 1025px) {
+    label {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    h1 {
+        display: none;
+    }
 }

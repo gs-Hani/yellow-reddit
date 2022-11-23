@@ -8,7 +8,17 @@ import './Post.css';
 
 export const Post = (props) => {
     const { post, children } = props
-    // console.log(post);
+    
+    const Text = () => {
+      if (post.selftext) {return (<p>{post.selftext}</p>)}
+      else               {return null}
+    };
+
+    const Image = () => {
+      if (post.url_overridden_by_dest) {return (<img src={post.url_overridden_by_dest} alt=""/>)}
+      else                             {return null}
+    };
+
     const Video = () => {
         if (post.secure_media && post.secure_media.reddit_video && post.secure_media.reddit_video.fallback_url) {
           return (
@@ -22,16 +32,26 @@ export const Post = (props) => {
         };
     }; 
     
+    const Box = () => {
+      if (!Text && !Image && !Video) {return null}
+      else { 
+        return (
+        <div className='content-box'>
+          <Text/>
+          <Image/>
+          <Video/>
+        </div>) }
+    };
+
     return (
       <article className="post-excerpt">
         <h3>{post.title}</h3>
-        <div>
+        <div className='sub-header'>
           <Subbredit subreddit={post.subreddit}   />
           <PostAuthor   author={post.author}      />
           <TimeAgo   timestamp={post.created_utc} />
         </div>
-        <Video/>
-        <img src={post.url} alt=""/> <br/>
+        <Box/>
         {children}
       </article>
     )

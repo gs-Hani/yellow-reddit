@@ -1,4 +1,4 @@
-import   React                           from 'react';
+import   React/*=============*/from 'react';
 import { formatDistanceToNow } from 'date-fns';
 
 export const TimeAgo = ({ timestamp }) => {
@@ -6,7 +6,6 @@ export const TimeAgo = ({ timestamp }) => {
   if (timestamp) {
     const milliseconds = timestamp * 1000;
     const date = new Date(milliseconds);
-    // const date = parseISO(timestamp);
     const timePeriod = formatDistanceToNow(date);
     timeAgo = `${timePeriod} ago `;
   }

@@ -1,0 +1,26 @@
+.sorting {
+    background: var(--color-10);
+    display: flex;
+    justify-content: space-between;
+    padding: 1% 0 ;
+    margin: 0 2%;
+    width: auto;
+    border-radius: var(--spacing-2);
+}
+
+button {
+    width: auto;
+    margin: 0 2%;
+    flex-grow: 1;
+    font-size: var(--spacing-2);
+    border-radius: var(--spacing-1);
+    height:     var(--spacing-3);
+    color:      var(--color-11);
+    background: var(--color-8);
+    color:      var(--color-1);
+    transition: all 200ms;
+}
+
+button:hover {
+    box-shadow: var(--spacing-0) var(--spacing-0) var(--color-1);
+}  

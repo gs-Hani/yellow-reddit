@@ -1,14 +1,14 @@
 :root {
-  --color-1: #131300;
-  --color-2: #2d2c00;
-  --color-3: #464500;
-  --color-4: #605f00;
-  --color-5: #797800;
-  --color-6: #797800;
-  --color-7: #acaa00;
-  --color-8: #c6c300;
-  --color-9: #dfdc00;
-  --color-10: #f9f500;
+  --color-1: #070702;
+  --color-2: #212108;
+  --color-3: #3a3a0d;
+  --color-4: #545413;
+  --color-5: #6d6d19;
+  --color-6: #87871f;
+  --color-7: #a0a025;
+  --color-8: #baba2a;
+  --color-9: #d3d330;
+  --color-10: #eded36;
   --color-11: #ffffff;
 
   --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
@@ -30,11 +30,11 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue','Georgia',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 100vw
+  width: 100vw;
 }
 
 HTML, body, * {

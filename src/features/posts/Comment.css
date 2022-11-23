@@ -1,0 +1,7 @@
+.Comment {
+    width: auto;
+    background-color: var(--color-9);
+    border-radius: var(--spacing-1);
+    padding: var(--spacing-1);
+    margin: 1% 0 1%;
+}
