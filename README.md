@@ -3,18 +3,18 @@
 This project is a portfolio project for the (Fullstack engineer path) in Codcademy, it is a reddit clone that was entirely designed from the ground up and it utilizes their read only .JSON API.
 
 ## Technologies
--HTML
--CSS
--JavaScript
--React
--Redux
+  - HTML
+  - CSS
+  - JavaScript
+  - React
+  - Redux
 
 ## Features
--view posts
--filter posts using predefined filters
--view and visit subreddits
--search for posts using a seach-bar
--view the limited comments of a singular post
+  - view posts
+  - filter posts using predefined filters
+  - view and visit subreddits
+  - search for posts using a seach-bar
+  - view the limited comments of a singular post
 
 ## Futur work
 -fetch more comments the more the user scrolls
