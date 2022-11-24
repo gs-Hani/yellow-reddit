@@ -23,7 +23,7 @@ function App() {
         </aside> 
         <main>
           <Routes>
-            <Route exact path="/"                   element={<PostsList/>}      />
+            <Route exact path="/yellow-reddit"      element={<PostsList/>}      />
             <Route exact path="/posts/:postId"      element={<SinglePostPage/>} />
             <Route exact path="/search/:searchTerm" element={<SearchList/>}     />
           </Routes>
