@@ -1,6 +1,24 @@
-# Getting Started with Create React App and Redux
+# Yellow Reddit
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+This project is a portfolio project for the (Fullstack engineer path) in Codcademy, it is a reddit clone that was entirely designed from the ground up and it utilizes their read only .JSON API.
+
+## Technologies
+-HTML
+-CSS
+-JavaScript
+-React
+-Redux
+
+## Features
+-view posts
+-filter posts using predefined filters
+-view and visit subreddits
+-search for posts using a seach-bar
+-view the limited comments of a singular post
+
+## Futur work
+-fetch more comments the more the user scrolls
+-adjust the UI for smaller screens so that the subreddit menu actually disappers when toggled of rather than being outside the screen
 
 ## Available Scripts
 
@@ -44,3 +62,4 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
