@@ -16,9 +16,9 @@ This project is a portfolio project for the (Fullstack engineer path) in Codcade
   - search for posts using a seach-bar
   - view the limited comments of a singular post
 
-## Futur work
--fetch more comments the more the user scrolls
--adjust the UI for smaller screens so that the subreddit menu actually disappers when toggled of rather than being outside the screen
+## Future work
+  - fetch more comments the more the user scrolls
+  - adjust the UI for smaller screens so that the subreddit menu actually disappers when toggled of rather than being outside the screen
 
 ## Available Scripts
 
