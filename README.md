@@ -18,7 +18,7 @@ This project is a portfolio project for the (Fullstack engineer path) in Codcade
 
 ## Future work
   - fetch more comments the more the user scrolls
-  - adjust the UI for smaller screens so that the subreddit menu actually disappers when toggled of rather than being outside the screen
+  - adjust the UI for smaller screens so that the subreddit menu actually disappers when toggled off rather than being outside the screen
 
 ## Available Scripts
 
