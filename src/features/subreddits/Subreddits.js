@@ -32,7 +32,7 @@ export const Subreddits = () => {
         <h2>Popular Subreddits</h2>
         <section className="subreddits-list">
           <div className="subreddit">
-            <Link to={'/'} onClick={() => dispatch(selectedSubreddit('/r/popular/'))} >
+            <Link to={'/yellow-reddit'} onClick={() => dispatch(selectedSubreddit('/r/popular/'))} >
               <img src={redditLogo} alt=''/>
               <span>Popular</span>
             </Link>
@@ -52,7 +52,7 @@ const Subreddit = (props) => {
   return (
     <div className="subreddit" >
 
-      <Link to={'/'} onClick={() => dispatch(selectedSubreddit(subreddit.url))}>
+      <Link to={'/yellow-reddit'} onClick={() => dispatch(selectedSubreddit(subreddit.url))}>
         <img src={subreddit.icon_img || redditLogo} alt=''/>
         <span>{subreddit.display_name_prefixed}</span>
       </Link>

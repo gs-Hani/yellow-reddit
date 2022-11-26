@@ -23,9 +23,9 @@ function App() {
         </aside> 
         <main>
           <Routes>
-            <Route exact path="/yellow-reddit"      element={<PostsList/>}      />
-            <Route exact path="/posts/:postId"      element={<SinglePostPage/>} />
-            <Route exact path="/search/:searchTerm" element={<SearchList/>}     />
+            <Route exact path="/yellow-reddit"                    element={<PostsList/>}      />
+            <Route exact path="/yellow-reddit/posts/:postId"      element={<SinglePostPage/>} />
+            <Route exact path="/yellow-reddit/search/:searchTerm" element={<SearchList/>}     />
           </Routes>
         </main> 
           

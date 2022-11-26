@@ -7,6 +7,10 @@
     color: var(--color-1);
 }
 
+.post-excerpt p {
+    overflow: clip;
+}
+
 main > .post-excerpt {
     margin: 0 0 2% 2% ;
     max-height: none;

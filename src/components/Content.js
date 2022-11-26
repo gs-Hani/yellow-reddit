@@ -7,7 +7,7 @@ export const Content = ({data}) => {
 
     <Post key={post.id} post={post} >
       <div className='footer'>
-        <Link to=     {`/posts/${post.id}`} 
+        <Link to=     {`/yellow-reddit/posts/${post.id}`} 
               state=  {{ permalink: post.permalink, 
                         index:     index, 
                         id:        post.id, 

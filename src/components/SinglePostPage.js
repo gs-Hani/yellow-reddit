@@ -56,7 +56,7 @@ export const SinglePostPage = () => {
 
   return (
     <Post key={post.id} post={post} >
-      <Link to={'/'} className="button muted-button">
+      <Link to={'/yellow-reddit'} className="button muted-button">
         Back to feed
       </Link>
       {comments}
